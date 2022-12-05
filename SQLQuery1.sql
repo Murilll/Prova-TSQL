@@ -107,10 +107,26 @@ INSERT DisciplinaxCurso VALUES(4, 3, 1)
 INSERT DisciplinaxCurso VALUES(5, 5, 1)
 INSERT DisciplinaxCurso VALUES(1, 2, 1)
 
-INSERT Turma VALUES(1, 3, 1, 71, 80, 100, 51, 302, 1)
-INSERT Turma VALUES(6, 4, 2, 71, 80, 100, 31, 261, 1)
+INSERT Turma VALUES(1, 1, 1, 71, 80, 100, 51, 302, 1)
+INSERT Turma VALUES(2, 2, 2, 71, 80, 100, 31, 261, 1)
+INSERT Turma VALUES(3, 3, 3, 71, 80, 46, 78, 123, 0)
+INSERT Turma VALUES(4, 4, 5, 100, 67, 89, 78 ,100, 1)
+INSERT Turma VALUES(5, 5, 3, 100, 67, 89, 78 ,100, 1)
+INSERT Turma VALUES(6, 6, 2, 71, 80, 100, 51, 302, 1)
+INSERT Turma VALUES(7, 1, 1, 71, 80, 100, 31, 261, 1)
 INSERT Turma VALUES(8, 2, 1, 71, 80, 46, 78, 123, 0)
-INSERT Turma VALUES(9, 1, 2, 100, 67, 89, 78 ,100, 1)
+INSERT Turma VALUES(9, 3, 2, 100, 67, 89, 78 ,100, 1)
+INSERT Turma VALUES(10, 4, 2, 100, 67, 89, 78 ,100, 1)
+INSERT Turma VALUES(11, 5, 3, 71, 80, 100, 51, 302, 1)
+INSERT Turma VALUES(12, 6, 3, 71, 80, 100, 31, 261, 1)
+INSERT Turma VALUES(13, 1, 4, 71, 80, 46, 78, 123, 0)
+INSERT Turma VALUES(14, 2, 4, 100, 67, 89, 78 ,100, 1)
+INSERT Turma VALUES(15, 3, 2, 100, 67, 89, 78 ,100, 1)
+INSERT Turma VALUES(16, 4, 2, 71, 80, 100, 51, 302, 1)
+INSERT Turma VALUES(17, 5, 3, 71, 80, 100, 31, 261, 1)
+INSERT Turma VALUES(18, 6, 3, 71, 80, 46, 78, 123, 0)
+INSERT Turma VALUES(19, 2, 2, 100, 67, 89, 78 ,100, 1)
+INSERT Turma VALUES(20, 1, 2, 100, 67, 89, 78 ,100, 1)
 
 
 INSERT Pagamentos VALUES(1, '21.03.2022', 'Pago' )
@@ -154,11 +170,6 @@ DELETE FROM Disciplina WHERE id = 1
 DELETE FROM Curso WHERE id = 8
 
 
-CREATE OR ALTER VIEW MostrandoAlunos
-AS
-SELECT A.Nome, T.id_Disciplina_Curso, T.Nota1, T.Nota2, T.Nota3, T.Nota4, T.NotaFinal FROM Aluno A
-	JOIN Turma T ON A.id = T.id_Aluno
-
 ALTER PROC VerificarBoleto
 AS
 BEGIN
@@ -169,6 +180,13 @@ BEGIN
 END
 
 EXEC VerificarBoleto
+
+CREATE OR ALTER VIEW MostrandoAlunos
+AS
+SELECT A.Nome as NomeAluno, D.Nome as NomeDisciplina, C.Nome as NomeCurso, T.Nota1, T.Nota2, T.Nota3, T.Nota4, T.NotaFinal FROM Aluno A
+	JOIN Turma T ON A.id = T.id_Aluno
+	JOIN Disciplina D ON T.id_Disciplina_Curso = D.id
+	JOIN Curso C ON T.id_Disciplina_Curso = C.id
 
 SELECT* FROM MostrandoAlunos
 SELECT * FROM Aluno
