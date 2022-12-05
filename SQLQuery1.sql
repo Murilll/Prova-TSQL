@@ -193,7 +193,8 @@ SELECT * FROM Aluno
 SELECT * FROM Professor
 SELECT * FROM Curso
 SELECT * FROM Disciplina
-SELECT * FROM Turma
+SELECT * FROM Turma 
 SELECT * FROM DisciplinaxCurso
 SELECT * FROM Pagamentos
+SELECT * FROM Pagamentos P JOIN Aluno A ON P.id_Aluno = A.id
 
